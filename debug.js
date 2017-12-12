@@ -1,8 +1,9 @@
+var Stopwatch = require("./lib/Stopwatch");
 
-var Stopwatch = require('./lib/Stopwatch');
-
-
-var countdownTimer = new Stopwatch(200, {almostDoneMS:600, refreshRateMS:100});
+var countdownTimer = new Stopwatch(200, {
+	almostDoneMS: 600,
+	refreshRateMS: 100
+});
 var startTime = countdownTimer.ms;
 
 var doneFiredTimes = 0;
@@ -14,12 +15,11 @@ setTimeout(function() {
 
 countdownTimer.start();
 
-countdownTimer.on('done',function(){
-	console.log('GOT DONE HIT');
+countdownTimer.on("done", function() {
+	console.log("GOT DONE HIT");
 	doneFiredTimes++;
-	setTimeout(function(){
+	setTimeout(function() {
 		countdownTimer.reset();
 		countdownTimer.start();
 	}, 300);
-	
 });

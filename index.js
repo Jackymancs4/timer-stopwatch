@@ -1,2 +1,2 @@
 // Export lib/mongule
-module.exports = require('./lib/Stopwatch');
+module.exports = require("./lib/Stopwatch");
