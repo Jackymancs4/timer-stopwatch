@@ -1,4 +1,6 @@
-# timer-stopwatch [![Codeship Status for MickCrozier/timer-stopwatch](https://codeship.io/projects/d68910a0-e989-0131-eba0-368dc75eab9e/status)](https://codeship.io/projects/26196)
+# timer-stopwatch
+
+[![dependencies Status](https://david-dm.org/jackymancs4/timer-stopwatch/status.svg)](https://david-dm.org/jackymancs4/timer-stopwatch) [![devDependencies Status](https://david-dm.org/jackymancs4/timer-stopwatch/dev-status.svg)](https://david-dm.org/jackymancs4/timer-stopwatch?type=dev)
 
 A stopwatch and countdown clock module for node.js
 
@@ -90,6 +92,17 @@ Unit and Integration tests (requires dev dependencies)
 ```shell
 npm test
 ```
+
+## Thanks to
+
+@MickCrozier - The maintainer of the [original package.](https://github.com/MickCrozier/timer-stopwatch/issues/9)
+
+Other contributors:
+
+* @danhere
+* @connorjburton
+* @RafaelKaczmarczyk
+* @nitzo
 
 ## License
 
