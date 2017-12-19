@@ -25,6 +25,36 @@ describe("Countdown Timer", function() {
 		expect(countdownTimer.ms).to.be(60000);
 	});
 
+	it("should be able to properly update the state and expose it", function(done) {
+		var countdownTimer = new Stopwatch(50);
+		expect(countdownTimer.isStopped()).to.be(true);
+		expect(countdownTimer.isRunning()).to.be(false);
+		expect(countdownTimer.isComplete()).to.be(false);
+		countdownTimer.start();
+		expect(countdownTimer.isStopped()).to.be(false);
+		expect(countdownTimer.isRunning()).to.be(true);
+		expect(countdownTimer.isComplete()).to.be(false);
+		countdownTimer.stop();
+		expect(countdownTimer.isStopped()).to.be(true);
+		expect(countdownTimer.isRunning()).to.be(false);
+		expect(countdownTimer.isComplete()).to.be(false);
+		countdownTimer.startstop();
+		expect(countdownTimer.isStopped()).to.be(false);
+		expect(countdownTimer.isRunning()).to.be(true);
+		expect(countdownTimer.isComplete()).to.be(false);
+		countdownTimer.startstop();
+		expect(countdownTimer.isStopped()).to.be(true);
+		expect(countdownTimer.isRunning()).to.be(false);
+		expect(countdownTimer.isComplete()).to.be(false);
+		countdownTimer.start();
+		setTimeout(function() {
+			expect(countdownTimer.isStopped()).to.be(false);
+			expect(countdownTimer.isRunning()).to.be(false);
+			expect(countdownTimer.isComplete()).to.be(true);
+			done();
+		}, 55);
+	});
+
 	it("should countdown with a normal refresh rate", function(done) {
 		var countdownTimer = new Stopwatch(60000, { refreshRateMS: 50 });
 		var startTime = countdownTimer.ms;
@@ -88,6 +118,20 @@ describe("Countdown Timer", function() {
 		countdownTimer.start();
 	});
 
+	it("should fire the onTime event", function(done) {
+		var countdownTimer = new Stopwatch(60000);
+		var startTime = countdownTimer.ms;
+
+		countdownTimer.onTime(function(time) {
+			expect(time.ms).to.equal(countdownTimer.ms);
+			if (countdownTimer.state === 1) {
+				done();
+			}
+			countdownTimer.stop();
+		});
+		countdownTimer.start();
+	});
+
 	it("should fire the almostdone event", function(done) {
 		var countdownTimer = new Stopwatch(40, {
 			almostDoneMS: 20,
@@ -107,6 +151,25 @@ describe("Countdown Timer", function() {
 		countdownTimer.on("almostdone", onDone);
 	});
 
+	it("should fire the almostDone event", function(done) {
+		var countdownTimer = new Stopwatch(40, {
+			almostDoneMS: 20,
+			refreshRateMS: 10
+		});
+		var startTime = countdownTimer.ms;
+
+		var onDone = function onDone() {
+			countdownTimer.stop();
+			expect(countdownTimer.ms).to.below(20);
+			expect(countdownTimer.ms).to.above(5);
+			countdownTimer.removeListener("almostdone", onDone);
+			done();
+		};
+
+		countdownTimer.start();
+		countdownTimer.onAlmostDone(onDone);
+	});
+
 	it("should fire the done event", function(done) {
 		var countdownTimer = new Stopwatch(30, { almostDoneMS: 20 });
 		var startTime = countdownTimer.ms;
@@ -119,6 +182,20 @@ describe("Countdown Timer", function() {
 
 		countdownTimer.start();
 		countdownTimer.on("done", onDone);
+	});
+
+	it("should fire the onDone event", function(done) {
+		var countdownTimer = new Stopwatch(30, { almostDoneMS: 20 });
+		var startTime = countdownTimer.ms;
+
+		var onDone = function onDone() {
+			expect(countdownTimer.ms).to.equal(0);
+			countdownTimer.removeListener("done", onDone);
+			done();
+		};
+
+		countdownTimer.start();
+		countdownTimer.onDone(onDone);
 	});
 
 	it("should fire the done event when done again after reset", function(done) {

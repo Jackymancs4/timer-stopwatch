@@ -10,8 +10,8 @@ module.exports = function(grunt) {
 				node: true,
 				globals: {}
 			},
-			all: ["*.js", "lib/**/*.js", "api/**/*js", "test/**/*.js"],
-			testu: ["*.js", "lib/**/*js", "api/**/*js", "test/unit/*js"]
+			all: ["*.js", "./lib/*.js", "test/**/*js"],
+			testu: ["./test/**/*js"]
 		},
 
 		mochaTest: {
@@ -29,7 +29,7 @@ module.exports = function(grunt) {
 			},
 
 			testall: {
-				files: ["*.js", "lib/**/*js", "api/**/*js", "test/unit/*js"],
+				files: ["*.js", "./lib/*.js", "test/**/*js"],
 				//tasks: ['jshint:all', 'mochaTest:unit', 'startMongo', 'wait:giveMongoSomeTimeToLoad', 'force:on','mochaTest:integration', 'force:restore', 'stopMongo'],
 				tasks: ["jshint:all", "mochaTest:unit"],
 				options: {
@@ -38,7 +38,7 @@ module.exports = function(grunt) {
 			},
 
 			testu: {
-				files: ["*.js", "lib/**/*js", "api/**/*js", "test/unit/*js"],
+				files: ["./test/**/*js"],
 				tasks: ["jshint:testu", "mochaTest:unit"],
 				options: {
 					//spawn: false,
