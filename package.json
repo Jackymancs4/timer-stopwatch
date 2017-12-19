@@ -1,7 +1,7 @@
 {
   "name": "timer-stopwatch-dev",
-  "version": "1.0.1",
-  "description": "A stopwatch and countdown timer for node",
+  "version": "1.1.0",
+  "description": "A stopwatch and countdown timer for node, maintained.",
   "author": "jackyman_cs4@live.it",
   "contributors": [
     "Mick Crozier <mick@backstagesolutions.com.au>"

@@ -2,7 +2,8 @@
 
 [![dependencies Status](https://david-dm.org/jackymancs4/timer-stopwatch/status.svg)](https://david-dm.org/jackymancs4/timer-stopwatch) [![devDependencies Status](https://david-dm.org/jackymancs4/timer-stopwatch/dev-status.svg)](https://david-dm.org/jackymancs4/timer-stopwatch?type=dev)
 
-A stopwatch and countdown clock module for node.js
+A stopwatch and countdown clock module for node.js, maintained.
+
 
 ## Install
 
@@ -60,6 +61,10 @@ timer.start();
 timer.stop();
 timer.startstop(); // Toggles the running state
 timer.reset(countDownMS); // optional countDownMS to reset countdown to that many milliseconds
+timer.getState() // Return 0, 1 or 2 if the timer is respectively stopped, running or complete
+timer.isStopped()
+timer.isRunning()
+timer.isComplete()
 ```
 
 ### Properties
@@ -80,11 +85,6 @@ var options = {
 var timer = new Stopwatch(60000, options);
 ```
 
-## Breaking Changes in v0.2
-
-* The `forcestop` event is being depreciated in favour of 'stop'.
-* Use the `onTime`, `onAlmostDone`, `onDone` and `onStop` methods in favour of `.on('eventname')`.
-
 ## Testing
 
 Unit and Integration tests (requires dev dependencies)
@@ -95,7 +95,7 @@ npm test
 
 ## Thanks to
 
-@MickCrozier - The maintainer of the [original package.](https://github.com/MickCrozier/timer-stopwatch/issues/9)
+@MickCrozier - The maintainer of the [original package.](https://github.com/MickCrozier/timer-stopwatch)
 
 Other contributors:
 
