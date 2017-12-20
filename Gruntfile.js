@@ -8,7 +8,8 @@ module.exports = function(grunt) {
 				eqeqeq: true,
 				eqnull: true,
 				node: true,
-				globals: {}
+				globals: {},
+				esversion: 6
 			},
 			all: ["*.js", "./lib/*.js", "test/**/*js"],
 			testu: ["./test/**/*js"]
